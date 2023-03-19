@@ -2,16 +2,6 @@ import React from "react";
 import { FaPlus, FaMinus, FaTrash } from "react-icons/fa";
 
 class CartItem extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      price: 999,
-      title: "mobile",
-      qty: 1,
-      img: "",
-    };
-  }
-
   increaseQuantity = () => {
     // this.state.qty += 1;
     this.setState({
@@ -40,9 +30,12 @@ class CartItem extends React.Component {
   };
 
   render() {
-    const { price, title, qty } = this.state;
-    console.log("render");
+    console.log("render with props", this.props.product);
+
+    const { price, title, qty, img } = this.props.product;
+    // const { increaseQuantity } = ;
     return (
+      // <div></div>
       <div className="cart-item">
         <div className="left-block">
           <img style={styles.image} />
@@ -57,19 +50,18 @@ class CartItem extends React.Component {
               //   onClick={() => {
               //     // increaseQuantity(product);
               //   }}
-              onClick={this.increaseQuantity}
+              onClick={() => this.props.increaseQuantity(this.props.product)}
               className="action-items"
               alt="Add"
             />
             <FaMinus
-              onClick={this.decreaseQuantity}
+              // onClick={this.decreaseQuantity}
+              onClick={() => this.props.decreaseQuantity(this.props.product)}
               className="action-items"
               alt="Decrease"
             />
             <FaTrash
-              onClick={() => {
-                // deleteQuantity(product.id);
-              }}
+              onClick={() => this.props.deleteProduct(this.props.product.id)}
               className="action-items"
               alt="Delete"
             />
